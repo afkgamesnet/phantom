@@ -1,0 +1,248 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Levi=20He=C3=9Fmann?= <levihsmn@gmail.com>
+Date: Thu, 19 Dec 2024 00:05:45 +0100
+Subject: [PATCH] basics
+
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index 2da91ed6363c0851e4c459188f5e8ef5475e0c97..8dcdade0134c5e7b13cfa47391a66539515ce1cf 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -107,7 +107,7 @@ tasks.jar {
+             "Specification-Version" to project.version,
+             "Specification-Vendor" to "Paper Team",
+             "Brand-Id" to "papermc:paper",
+-            "Brand-Name" to "Paper",
++            "Brand-Name" to "Phantom",
+             "Build-Number" to (build ?: ""),
+             "Build-Time" to Instant.now().toString(),
+             "Git-Branch" to gitBranch, // Paper
+diff --git a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
+index 790bad0494454ca12ee152e3de6da3da634d9b20..c487779682f83f969ed524a7df8f76c06ea451a3 100644
+--- a/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
++++ b/src/main/java/io/papermc/paper/ServerBuildInfoImpl.java
+@@ -30,7 +30,7 @@ public record ServerBuildInfoImpl(
+     private static final String ATTRIBUTE_GIT_BRANCH = "Git-Branch";
+     private static final String ATTRIBUTE_GIT_COMMIT = "Git-Commit";
+ 
+-    private static final String BRAND_PAPER_NAME = "Paper";
++    private static final String BRAND_PAPER_NAME = "Phantom";
+ 
+     private static final String BUILD_DEV = "DEV";
+ 
+diff --git a/src/main/java/io/papermc/paper/command/PaperCommands.java b/src/main/java/io/papermc/paper/command/PaperCommands.java
+index 7b58b2d6297800c2dcdbf7539e5ab8e7703f39f1..02f45be2ab9962c9724acb3543c7a55a2169cefc 100644
+--- a/src/main/java/io/papermc/paper/command/PaperCommands.java
++++ b/src/main/java/io/papermc/paper/command/PaperCommands.java
+@@ -16,8 +16,8 @@ public final class PaperCommands {
+ 
+     private static final Map<String, Command> COMMANDS = new HashMap<>();
+     static {
+-        COMMANDS.put("paper", new PaperCommand("paper"));
+-        COMMANDS.put("callback", new CallbackCommand("callback"));
++        // COMMANDS.put("paper", new PaperCommand("paper"));
++        // COMMANDS.put("callback", new CallbackCommand("callback"));
+         COMMANDS.put("mspt", new MSPTCommand("mspt"));
+     }
+ 
+@@ -25,6 +25,6 @@ public final class PaperCommands {
+         COMMANDS.forEach((s, command) -> {
+             server.server.getCommandMap().register(s, "Paper", command);
+         });
+-        server.server.getCommandMap().register("bukkit", new PaperPluginsCommand());
++        // server.server.getCommandMap().register("bukkit", new PaperPluginsCommand());
+     }
+ }
+diff --git a/src/main/java/net/minecraft/commands/Commands.java b/src/main/java/net/minecraft/commands/Commands.java
+index 517cb238ec280aadd1fc54bcb675ed386e798eaf..95720bacb552441166e5c2df33c8f61d6f056056 100644
+--- a/src/main/java/net/minecraft/commands/Commands.java
++++ b/src/main/java/net/minecraft/commands/Commands.java
+@@ -160,70 +160,70 @@ public class Commands {
+ 
+     public Commands(Commands.CommandSelection environment, CommandBuildContext commandRegistryAccess) {
+         // Paper
+-        AdvancementCommands.register(this.dispatcher);
+-        AttributeCommand.register(this.dispatcher, commandRegistryAccess);
+-        ExecuteCommand.register(this.dispatcher, commandRegistryAccess);
+-        BossBarCommands.register(this.dispatcher, commandRegistryAccess);
+-        ClearInventoryCommands.register(this.dispatcher, commandRegistryAccess);
+-        CloneCommands.register(this.dispatcher, commandRegistryAccess);
+-        DamageCommand.register(this.dispatcher, commandRegistryAccess);
+-        DataCommands.register(this.dispatcher);
+-        DataPackCommand.register(this.dispatcher);
+-        DebugCommand.register(this.dispatcher);
+-        DefaultGameModeCommands.register(this.dispatcher);
++        // AdvancementCommands.register(this.dispatcher);
++        // AttributeCommand.register(this.dispatcher, commandRegistryAccess);
++        // ExecuteCommand.register(this.dispatcher, commandRegistryAccess);
++        // BossBarCommands.register(this.dispatcher, commandRegistryAccess);
++        // ClearInventoryCommands.register(this.dispatcher, commandRegistryAccess);
++        // CloneCommands.register(this.dispatcher, commandRegistryAccess);
++        // DamageCommand.register(this.dispatcher, commandRegistryAccess);
++        // DataCommands.register(this.dispatcher);
++        // DataPackCommand.register(this.dispatcher);
++        // DebugCommand.register(this.dispatcher);
++        // DefaultGameModeCommands.register(this.dispatcher);
+         DifficultyCommand.register(this.dispatcher);
+-        EffectCommands.register(this.dispatcher, commandRegistryAccess);
+-        EmoteCommands.register(this.dispatcher);
+-        EnchantCommand.register(this.dispatcher, commandRegistryAccess);
+-        ExperienceCommand.register(this.dispatcher);
++        // EffectCommands.register(this.dispatcher, commandRegistryAccess);
++        // EmoteCommands.register(this.dispatcher);
++        // EnchantCommand.register(this.dispatcher, commandRegistryAccess);
++        // ExperienceCommand.register(this.dispatcher);
+         FillCommand.register(this.dispatcher, commandRegistryAccess);
+-        FillBiomeCommand.register(this.dispatcher, commandRegistryAccess);
+-        ForceLoadCommand.register(this.dispatcher);
+-        FunctionCommand.register(this.dispatcher);
++        // FillBiomeCommand.register(this.dispatcher, commandRegistryAccess);
++        // ForceLoadCommand.register(this.dispatcher);
++        // FunctionCommand.register(this.dispatcher);
+         GameModeCommand.register(this.dispatcher);
+         GameRuleCommand.register(this.dispatcher, commandRegistryAccess);
+         GiveCommand.register(this.dispatcher, commandRegistryAccess);
+-        HelpCommand.register(this.dispatcher);
+-        ItemCommands.register(this.dispatcher, commandRegistryAccess);
+-        KickCommand.register(this.dispatcher);
+-        KillCommand.register(this.dispatcher);
+-        ListPlayersCommand.register(this.dispatcher);
+-        LocateCommand.register(this.dispatcher, commandRegistryAccess);
+-        LootCommand.register(this.dispatcher, commandRegistryAccess);
+-        MsgCommand.register(this.dispatcher);
+-        ParticleCommand.register(this.dispatcher, commandRegistryAccess);
+-        PlaceCommand.register(this.dispatcher);
+-        PlaySoundCommand.register(this.dispatcher);
+-        RandomCommand.register(this.dispatcher);
++        // HelpCommand.register(this.dispatcher);
++        // ItemCommands.register(this.dispatcher, commandRegistryAccess);
++        // KickCommand.register(this.dispatcher);
++        // KillCommand.register(this.dispatcher);
++        // ListPlayersCommand.register(this.dispatcher);
++        // LocateCommand.register(this.dispatcher, commandRegistryAccess);
++        // LootCommand.register(this.dispatcher, commandRegistryAccess);
++        // MsgCommand.register(this.dispatcher);
++        // ParticleCommand.register(this.dispatcher, commandRegistryAccess);
++        // PlaceCommand.register(this.dispatcher);
++        // PlaySoundCommand.register(this.dispatcher);
++        // RandomCommand.register(this.dispatcher);
+         ReloadCommand.register(this.dispatcher);
+-        RecipeCommand.register(this.dispatcher);
+-        ReturnCommand.register(this.dispatcher);
+-        RideCommand.register(this.dispatcher);
+-        RotateCommand.register(this.dispatcher);
+-        SayCommand.register(this.dispatcher);
+-        ScheduleCommand.register(this.dispatcher);
+-        ScoreboardCommand.register(this.dispatcher, commandRegistryAccess);
+-        SeedCommand.register(this.dispatcher, environment != Commands.CommandSelection.INTEGRATED);
+-        SetBlockCommand.register(this.dispatcher, commandRegistryAccess);
+-        SetSpawnCommand.register(this.dispatcher);
+-        SetWorldSpawnCommand.register(this.dispatcher);
+-        SpectateCommand.register(this.dispatcher);
+-        SpreadPlayersCommand.register(this.dispatcher);
+-        StopSoundCommand.register(this.dispatcher);
+-        SummonCommand.register(this.dispatcher, commandRegistryAccess);
+-        TagCommand.register(this.dispatcher);
+-        TeamCommand.register(this.dispatcher, commandRegistryAccess);
+-        TeamMsgCommand.register(this.dispatcher);
+-        TeleportCommand.register(this.dispatcher);
+-        TellRawCommand.register(this.dispatcher, commandRegistryAccess);
+-        TickCommand.register(this.dispatcher);
+-        TimeCommand.register(this.dispatcher);
+-        TitleCommand.register(this.dispatcher, commandRegistryAccess);
+-        TriggerCommand.register(this.dispatcher);
+-        WeatherCommand.register(this.dispatcher);
+-        WorldBorderCommand.register(this.dispatcher);
++        // RecipeCommand.register(this.dispatcher);
++        // ReturnCommand.register(this.dispatcher);
++        // RideCommand.register(this.dispatcher);
++        // RotateCommand.register(this.dispatcher);
++        //SayCommand.register(this.dispatcher);
++        // ScheduleCommand.register(this.dispatcher);
++        // ScoreboardCommand.register(this.dispatcher, commandRegistryAccess);
++        // SeedCommand.register(this.dispatcher, environment != Commands.CommandSelection.INTEGRATED);
++        // SetBlockCommand.register(this.dispatcher, commandRegistryAccess);
++        // SetSpawnCommand.register(this.dispatcher);
++        // SetWorldSpawnCommand.register(this.dispatcher);
++        // SpectateCommand.register(this.dispatcher);
++        // SpreadPlayersCommand.register(this.dispatcher);
++        // StopSoundCommand.register(this.dispatcher);
++        // SummonCommand.register(this.dispatcher, commandRegistryAccess);
++        // TagCommand.register(this.dispatcher);
++        // TeamCommand.register(this.dispatcher, commandRegistryAccess);
++        // TeamMsgCommand.register(this.dispatcher);
++        // TeleportCommand.register(this.dispatcher);
++        // TellRawCommand.register(this.dispatcher, commandRegistryAccess);
++        // TickCommand.register(this.dispatcher);
++        // TimeCommand.register(this.dispatcher);
++        // TitleCommand.register(this.dispatcher, commandRegistryAccess);
++        // TriggerCommand.register(this.dispatcher);
++        // WeatherCommand.register(this.dispatcher);
++        // WorldBorderCommand.register(this.dispatcher);
+         if (JvmProfiler.INSTANCE.isAvailable()) {
+-            JfrCommand.register(this.dispatcher);
++            // JfrCommand.register(this.dispatcher);
+         }
+ 
+         if (SharedConstants.IS_RUNNING_IN_IDE) {
+@@ -240,25 +240,25 @@ public class Commands {
+         }
+ 
+         if (environment.includeDedicated) {
+-            BanIpCommands.register(this.dispatcher);
+-            BanListCommands.register(this.dispatcher);
+-            BanPlayerCommands.register(this.dispatcher);
++            // BanIpCommands.register(this.dispatcher);
++            // BanListCommands.register(this.dispatcher);
++            // BanPlayerCommands.register(this.dispatcher);
+             DeOpCommands.register(this.dispatcher);
+             OpCommand.register(this.dispatcher);
+-            PardonCommand.register(this.dispatcher);
+-            PardonIpCommand.register(this.dispatcher);
+-            PerfCommand.register(this.dispatcher);
++            // PardonCommand.register(this.dispatcher);
++            // PardonIpCommand.register(this.dispatcher);
++            // PerfCommand.register(this.dispatcher);
+             SaveAllCommand.register(this.dispatcher);
+             SaveOffCommand.register(this.dispatcher);
+             SaveOnCommand.register(this.dispatcher);
+-            SetPlayerIdleTimeoutCommand.register(this.dispatcher);
++            // SetPlayerIdleTimeoutCommand.register(this.dispatcher);
+             StopCommand.register(this.dispatcher);
+-            TransferCommand.register(this.dispatcher);
++            // TransferCommand.register(this.dispatcher);
+             WhitelistCommand.register(this.dispatcher);
+         }
+ 
+         if (environment.includeIntegrated) {
+-            PublishCommand.register(this.dispatcher);
++            // PublishCommand.register(this.dispatcher);
+         }
+ 
+         // Paper start - Vanilla command permission fixes
+diff --git a/src/main/java/net/minecraft/server/PlayerAdvancements.java b/src/main/java/net/minecraft/server/PlayerAdvancements.java
+index 8e2eb7b61421ceb063654826941f1a81f6f50bdf..5dec399a01a5104e966b6093903a65a5477ea77b 100644
+--- a/src/main/java/net/minecraft/server/PlayerAdvancements.java
++++ b/src/main/java/net/minecraft/server/PlayerAdvancements.java
+@@ -249,7 +249,7 @@ public class PlayerAdvancements {
+                 advancement.value().display().ifPresent((advancementdisplay) -> {
+                     // Paper start - Add Adventure message to PlayerAdvancementDoneEvent
+                     if (event.message() != null && this.player.serverLevel().getGameRules().getBoolean(GameRules.RULE_ANNOUNCE_ADVANCEMENTS)) {
+-                        this.playerList.broadcastSystemMessage(io.papermc.paper.adventure.PaperAdventure.asVanilla(event.message()), false);
++                        // this.playerList.broadcastSystemMessage(io.papermc.paper.adventure.PaperAdventure.asVanilla(event.message()), false);
+                         // Paper end
+                     }
+ 
+diff --git a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
+index c3ec370b83b895be0f03662e3884fa4a2442a2a6..0e0416607b4850684cc439ec28120a4af71f5629 100644
+--- a/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
++++ b/src/main/java/net/minecraft/server/dedicated/DedicatedServerProperties.java
+@@ -58,7 +58,7 @@ public class DedicatedServerProperties extends Settings<DedicatedServerPropertie
+     public final String serverIp = this.get("server-ip", "");
+     public final boolean pvp = this.get("pvp", true);
+     public final boolean allowFlight = this.get("allow-flight", false);
+-    public final String motd = this.get("motd", "A Minecraft Server");
++    public final String motd = this.get("motd", "A Phantom Server");
+     public final String bugReportLink = this.get("bug-report-link", "");
+     public final boolean forceGameMode = this.get("force-gamemode", false);
+     public final boolean enforceWhitelist = this.get("enforce-whitelist", false);

@@ -1,0 +1,37 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Levi=20He=C3=9Fmann?= <levihsmn@gmail.com>
+Date: Thu, 19 Dec 2024 00:05:37 +0100
+Subject: [PATCH] basics
+
+
+diff --git a/build.gradle.kts b/build.gradle.kts
+index 571534b42cd9c33d6a7bb6fe3bf3a28e33f8e5de..625945baada659740856ab65230c53f7cf2dcf71 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -86,6 +86,8 @@ dependencies {
+     // Paper end
+     api("org.jspecify:jspecify:1.0.0") // Paper - add jspecify
+ 
++    api("org.mongodb:mongodb-driver-sync:4.10.0-alpha1")
++
+     testImplementation("org.apache.commons:commons-lang3:3.12.0")
+     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
+     testImplementation("org.hamcrest:hamcrest:2.2")
+diff --git a/src/main/java/org/bukkit/command/SimpleCommandMap.java b/src/main/java/org/bukkit/command/SimpleCommandMap.java
+index 5df19bd701c67506689fc7f49d91f99ebfbc83f0..775d5f24e5451099a580191700fa3294d6ca7147 100644
+--- a/src/main/java/org/bukkit/command/SimpleCommandMap.java
++++ b/src/main/java/org/bukkit/command/SimpleCommandMap.java
+@@ -39,11 +39,11 @@ public class SimpleCommandMap implements CommandMap {
+         register("bukkit", new VersionCommand("version"));
+         register("bukkit", new ReloadCommand("reload"));
+         //register("bukkit", new PluginsCommand("plugins")); // Paper
+-        register("bukkit", new co.aikar.timings.TimingsCommand("timings")); // Paper
++        //register("bukkit", new co.aikar.timings.TimingsCommand("timings")); // Paper
+     }
+ 
+     public void setFallbackCommands() {
+-        register("bukkit", new HelpCommand());
++        //register("bukkit", new HelpCommand());
+     }
+ 
+     /**
